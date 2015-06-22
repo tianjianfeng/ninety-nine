@@ -39,4 +39,19 @@ object NinetyNine {
     }
   }
 
+  // P4
+  def length(l: List[Int]) = {
+    l.foldLeft(0)((acc, a) => acc + 1)
+  }
+
+  // P5
+  def reverse(l: List[Int]) = {
+    l.foldLeft(List[Int]())((acc, a) => List(a) ::: acc)
+  }
+
+  // P6
+  def isPalindrome(l: List[Int]): Boolean = {
+    l == reverse(l)
+  }
+
 }
