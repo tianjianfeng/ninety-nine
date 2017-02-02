@@ -3,8 +3,8 @@ import java.util.NoSuchElementException
 import scala.annotation.tailrec
 
 /**
- * Created by jianfeng on 19/06/2015.
- */
+  * Created by jianfeng on 19/06/2015.
+  */
 object NinetyNine {
 
   // P1
@@ -50,8 +50,20 @@ object NinetyNine {
   }
 
   // P6
-  def isPalindrome(l: List[Int]): Boolean = {
-    l == reverse(l)
+  def isPalindrome[A](l: List[A]): Boolean = {
+    // In theory, we could be slightly more efficient than this.  This approach
+    // traverses the list twice: once to reverse it, and once to check equality.
+    // Technically, we only need to check the first half of the list for equality
+    // with the first half of the reversed list.  The code to do that more
+    // efficiently than this implementation is much more complicated, so we'll
+    // leave things with this clear and concise implementation.
+
+    // l == l.reverse
+
+    val length = l.length
+    val (firstHalf, secondHalf) = l.splitAt(length / 2)
+    if (length % 2 == 0) firstHalf == secondHalf.reverse
+    else firstHalf == secondHalf.tail.reverse
   }
 
 }

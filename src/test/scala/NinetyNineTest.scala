@@ -33,5 +33,11 @@ class NinetyNineTest extends FlatSpec with Matchers{
   // P6
   it should "Find out whether a list is a palindrome" in {
     NinetyNine.isPalindrome(List(1, 2, 3, 2, 1)) should be (true)
+    NinetyNine.isPalindrome(List(1, 2, 3, 2)) should be (false)
   }
+
+  // P7
+//  it should "Flatten a nested list structure" in {
+//    NinetyNine.flatten(List(List(1, 1), 2, List(3, List(5, 8)))) should be (List(1, 1, 2, 3, 5, 8))
+//  }
 }
