@@ -62,4 +62,14 @@ object NinetyNine {
     else firstHalf == secondHalf.tail.reverse
   }
 
+  // P7
+  def flatten(l: List[Any]): List[Any] = l flatMap {
+    case m: List[_] => flatten(m)
+    case e => List(e)
+  }
+
+  // P8
+  def compress[A](l: List[A]): List[A] =
+    (l.foldRight[(List[A], A)]((Nil, l.head))((a, e) => if (e._2 != a) (a :: e._1, a) else (e._1, a)))._1
+
 }
