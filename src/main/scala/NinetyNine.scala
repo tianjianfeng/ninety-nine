@@ -8,46 +8,42 @@ import scala.annotation.tailrec
 object NinetyNine {
 
   // P1
-  def last(l: List[Int]): Int = {
-    l match {
-      case Nil => throw new NoSuchElementException
-      case h :: Nil => h
-      case _ :: tail => last(tail)
-    }
+  def last[A](l: List[A]): A = l match {
+    case h :: Nil => h
+    case _ :: tail => last(tail)
+    case _ => throw new NoSuchElementException()
   }
+
 
   // P2
-  def penultimate(l: List[Int]): Int = {
-    l match {
-      case Nil => throw new NoSuchElementException
-      case h :: Nil => throw new NoSuchElementException
-      case h :: p :: Nil => h
-      case _ :: tail => penultimate(tail)
-    }
+  def penultimate[A](l: List[A]): A = l match {
+    case h :: _ :: Nil => h
+    case _ :: tail => penultimate(tail)
+    case _ => throw new NoSuchElementException()
   }
 
+  def lastNElement[A](n: Int, l: List[A]): A =
+    if (n <= 0) throw new NoSuchElementException()
+    else if (n > l.length) throw new NoSuchElementException()
+    else l.takeRight(n).head
+
   // P3
-  def nth(n: Int, l: List[Int]): Int = {
-    if (n >= l.size || n < 0) throw new scala.NoSuchElementException
-    else {
-      @tailrec
-      def loop(m: Int, k: List[Int]): Int = {
-        if (m == n) k.head
-        else loop(m + 1, k.tail)
+  def nth[A](n: Int, l: List[A]): A = {
+    def loop(m: Int, ls: List[A]): A = {
+      ls match {
+        case h :: _ if (n == m) => h
+        case h :: tail => loop(m + 1, tail)
+        case _ => throw new NoSuchElementException()
       }
-      loop(0, l)
     }
+    loop(0, l)
   }
 
   // P4
-  def length(l: List[Int]) = {
-    l.foldLeft(0)((acc, a) => acc + 1)
-  }
+  def length[A](l: List[A]): Int = l.foldLeft[Int](0)((c, _) => c + 1)
 
   // P5
-  def reverse(l: List[Int]) = {
-    l.foldLeft(List[Int]())((acc, a) => List(a) ::: acc)
-  }
+  def reverse[A](l: List[A]): List[A] = l.foldLeft[List[A]](Nil)((a, b) => b :: a)
 
   // P6
   def isPalindrome[A](l: List[A]): Boolean = {
