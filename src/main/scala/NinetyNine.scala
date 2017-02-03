@@ -70,7 +70,12 @@ object NinetyNine {
 
   // P8
   def compress[A](l: List[A]): List[A] =
-  (l.foldRight[(List[A], A)]((Nil, l.head))((a, e) => if (e._2 != a) (a :: e._1, a) else (e._1, a)))._1
+  l.foldRight[List[A]](Nil){(e, ls) => ls match {
+    case Nil => List(e)
+    case h :: _ if (e != h) => e :: ls
+    case _ => ls
+   }
+  }
 
   // P9
   def pack[A](l: List[A]): List[List[A]] =
